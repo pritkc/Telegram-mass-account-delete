@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "telegram-joined-cleaner"
+version = "1.0.0"
+description = "Safely remove Telegram 'X joined Telegram' service-only dialogs"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Community"}]
+license = {text = "MIT"}
+dependencies = ["telethon>=1.44,<2"]
+
+[project.scripts]
+telegram-joined-cleaner = "tg_joined_cleaner.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 110
