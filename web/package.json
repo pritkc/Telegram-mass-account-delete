@@ -1,0 +1,20 @@
+{
+  "name": "telegram-joined-cleaner-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Client-only browser UI for safely cleaning Telegram joined-account service dialogs.",
+  "scripts": {
+    "build": "webpack --mode production",
+    "check": "node --check src/main.js"
+  },
+  "dependencies": {
+    "telegram": "2.26.22"
+  },
+  "devDependencies": {
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
