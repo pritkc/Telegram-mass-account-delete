@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f172a" />
+    <title>Telegram Joined Cleaner</title>
+    <link rel="stylesheet" href="./web/styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "telegram": "https://esm.unpkg.com/telegram@2.26.22?bundle",
+          "telegram/sessions": "https://esm.unpkg.com/telegram@2.26.22/sessions?bundle"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">Telegram Joined Cleaner</p>
+        <h1>Remove “X joined Telegram” service chats safely.</h1>
+        <p class="subtitle">
+          This page runs client-side. Telegram credentials, the login session, and account data stay in your browser and go directly to Telegram.
+        </p>
+      </header>
+      <section id="setup-card" class="card">
+        <h2>1. Connect Telegram</h2>
+        <p class="muted">Use your own Telegram API ID and API hash from <a href="https://my.telegram.org" target="_blank" rel="noreferrer">my.telegram.org</a>.</p>
+        <form id="login-form" class="stack">
+          <label>Telegram API ID<input id="api-id" inputmode="numeric" autocomplete="off" placeholder="12345678" required /></label>
+          <label>Telegram API hash<input id="api-hash" type="password" autocomplete="off" placeholder="Your Telegram API hash" required /></label>
+          <label>Phone number<input id="phone" type="tel" autocomplete="tel" placeholder="+1 555 123 4567" required /></label>
+          <label class="checkbox-row"><input id="remember-creds" type="checkbox" /> <span>Remember API credentials on this device</span></label>
+          <button id="connect-btn" type="submit">Connect Telegram</button>
+        </form>
+        <details>
+          <summary>Where do I get the API ID and hash?</summary>
+          <ol><li>Open my.telegram.org and sign in.</li><li>Open <strong>API development tools</strong>.</li><li>Create an application and copy the API ID and API hash here.</li></ol>
+          <p class="warning">Telegram treats the API hash as a secret. Never put it in this repository or send it to an intermediary server.</p>
+        </details>
+      </section>
+      <section id="app-card" class="card hidden">
+        <div class="account-row"><div><h2>2. Find removable dialogs</h2><p id="account-label" class="muted"></p></div><button id="logout-btn" class="secondary" type="button">Log out / forget session</button></div>
+        <div class="toolbar"><label>Scope<select id="scope"><option value="main">Main chats</option><option value="archive">Archive only</option><option value="all">All dialogs</option></select></label><button id="scan-btn" type="button">Scan Telegram</button></div>
+        <div id="status" class="status" role="status"></div>
+        <div id="results" class="results empty">No scan yet.</div>
+        <p class="muted footnote">Matching is fail-closed: only private user dialogs whose recent history contains exactly one Telegram contact-signup service message are shown.</p>
+      </section>
+      <footer><a href="https://github.com/pritkc/Telegram-mass-account-delete" target="_blank" rel="noreferrer">Source code</a><span>·</span><span>Client-only; no application backend.</span></footer>
+    </main>
+    <script type="module" src="./web/src/main.js"></script>
+  </body>
+</html>
