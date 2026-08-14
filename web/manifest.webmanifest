@@ -1,0 +1,18 @@
+{
+  "name": "Telegram Joined Cleaner",
+  "short_name": "TG Cleaner",
+  "description": "Client-only cleanup of Telegram joined-service chats.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#0b1220",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

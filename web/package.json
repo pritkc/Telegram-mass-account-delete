@@ -5,12 +5,17 @@
   "description": "Client-only browser UI for safely cleaning Telegram joined-account service dialogs.",
   "scripts": {
     "build": "webpack --mode production",
-    "check": "node --check src/main.js"
+    "check": "node --check src/main.js && node --check src/matching.js && node --check src/storage.js && node --check src/telegramOps.js",
+    "test": "node --test test/matching.test.js"
   },
   "dependencies": {
     "telegram": "2.26.22"
   },
   "devDependencies": {
+    "buffer": "^6.0.3",
+    "copy-webpack-plugin": "^14.0.0",
+    "process": "^0.11.10",
+    "util": "^0.12.5",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1"
   },
