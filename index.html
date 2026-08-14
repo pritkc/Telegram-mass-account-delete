@@ -4,19 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Telegram Joined Cleaner</title>
-    <meta http-equiv="refresh" content="0; url=./web/" />
-    <link rel="canonical" href="https://pritkc.github.io/Telegram-mass-account-delete/" />
+    <meta name="robots" content="noindex" />
     <style>
-      body { font-family: system-ui, sans-serif; background: #07111f; color: #e8eef6; padding: 2rem; }
+      body { font-family: system-ui, sans-serif; background: #07111f; color: #e8eef6; padding: 2rem; line-height: 1.5; max-width: 42rem; }
       a { color: #7dd3fc; }
+      code { color: #bfdbfe; }
     </style>
   </head>
   <body>
+    <h1>Telegram Joined Cleaner</h1>
     <p>
-      The production app is the built static site on
-      <a href="https://pritkc.github.io/Telegram-mass-account-delete/">GitHub Pages</a>.
-      For local development, open the webpack build under <code>web/dist</code> after
-      <code>npm run build</code> in <code>web/</code>.
+      This repository root is <strong>not</strong> the production site.
+      GitHub Pages deploys the webpack build from <code>web/dist</code> via
+      <code>.github/workflows/pages.yml</code>.
+    </p>
+    <p>
+      Production URL:
+      <a href="https://pritkc.github.io/Telegram-mass-account-delete/">https://pritkc.github.io/Telegram-mass-account-delete/</a>
+    </p>
+    <p>
+      Local preview:
+      <code>cd web &amp;&amp; npm ci &amp;&amp; npm run build &amp;&amp; npx serve dist</code>
+    </p>
+    <p>
+      Do not open <code>web/index.html</code> directly — it expects the compiled
+      <code>app.js</code> next to it, which only exists after <code>npm run build</code>
+      inside <code>web/dist/</code>.
     </p>
   </body>
 </html>

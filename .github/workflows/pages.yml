@@ -19,11 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
           cache: npm
           cache-dependency-path: web/package-lock.json
+
       - name: Install and build web app
         working-directory: web
         run: |
@@ -31,6 +35,31 @@ jobs:
           npm test
           npm run check
           npm run build
+
+      - name: Verify dist contents and relative asset paths
+        working-directory: web
+        run: |
+          set -euo pipefail
+          test -f dist/index.html
+          test -f dist/app.js
+          test -f dist/styles.css
+          test -f dist/manifest.webmanifest
+          test -f dist/icon.svg
+          # Must reference compiled bundle relatively (works under /Telegram-mass-account-delete/).
+          grep -F 'src="./app.js"' dist/index.html
+          grep -F 'href="./styles.css"' dist/index.html
+          grep -F 'href="./manifest.webmanifest"' dist/index.html
+          # Must not point at source tree or absolute repo-root paths that break on Pages.
+          if grep -E 'src="(\.?\.?/)?web/src/|src="/Telegram-mass-account-delete/web/' dist/index.html; then
+            echo "dist/index.html references unbuilt source paths"
+            exit 1
+          fi
+          # Sanity: bundle contains Telegram deletion + matcher symbols.
+          grep -F 'DeleteHistory' dist/app.js >/dev/null
+          grep -F 'MessageActionContactSignUp' dist/app.js >/dev/null
+          # Refuse tiny placeholder bundles.
+          test "$(wc -c < dist/app.js)" -gt 100000
+
       - name: Verify no secrets in build output
         working-directory: web
         run: |
@@ -42,6 +71,7 @@ jobs:
             echo "Possible session string"
             exit 1
           fi
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
